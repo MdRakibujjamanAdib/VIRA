@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Privacy Policy – VYRA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="app_icon.png" />
+  <meta
+    name="description"
+    content="Privacy Policy for VYRA – Your Virtual Camera. Learn how we handle authentication, Google Drive storage, and image generation."
+  />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Roboto", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+      margin: 0;
+    }
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    header {
+      border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+      background: #020617;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+    .brand {
+      font-size: 0.95rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3rem;
+      line-height: 1.6;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: 1.15rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+    p, li {
+      font-size: 0.92rem;
+      color: #cbd5f5;
+    }
+    ul {
+      padding-left: 1.1rem;
+    }
+    footer {
+      border-top: 1px solid rgba(30, 64, 175, 0.6);
+      background: #020617;
+      color: #9ca3af;
+      font-size: 0.8rem;
+      padding: 1rem 1.25rem 1.4rem;
+    }
+    .footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <div class="nav-left">
+        <img src="app_icon.png" alt="VYRA Logo" class="logo" />
+        <div class="brand">VYRA</div>
+      </div>
+      <a href="index.html">Back to Home</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Privacy Policy</h1>
+    <p><strong>Last updated:</strong> [add date]</p>
+
+    <h2>1. Introduction</h2>
+    <p>
+      VYRA ("we", "our", "the app") is built with a user-first, data-ownership
+      philosophy. This Privacy Policy explains what data we access, why we need
+      it, how it is used, and how you stay in full control at all times.
+    </p>
+
+    <h2>2. Core Principle: Your Data Is All Yours</h2>
+    <p>
+      VYRA does not store your images on our own servers. All uploaded or
+      generated images that you choose to post are stored in your own Google
+      Drive, under your Google account. You remain the owner of your data.
+    </p>
+
+    <h2>3. How VYRA Works With Your Data</h2>
+    <p>VYRA follows a clear workflow:</p>
+    <ul>
+      <li><strong>Input reference:</strong> You select or upload a reference image.</li>
+      <li><strong>Prompt extraction:</strong> VYRA analyzes the reference and generates a detailed text prompt.</li>
+      <li><strong>Remix:</strong> You may request image generation/remix using that prompt via APIs.</li>
+      <li><strong>Post or download:</strong> You can download the generated image or post it.</li>
+      <li><strong>Store & share:</strong> When you post, the image is stored in your Google Drive and shared via a Google Drive public link ("anyone with the link can view").</li>
+    </ul>
+
+    <h2>4. Google Account & Authentication</h2>
+    <p>
+      VYRA uses Google Sign-In to authenticate you securely. We may access basic
+      profile information such as:
+    </p>
+    <ul>
+      <li>Name</li>
+      <li>Email address</li>
+      <li>Profile image</li>
+    </ul>
+    <p>
+      This information is used to identify your account, associate posts with
+      you, and help prevent abuse. We do not access your emails or contacts, and
+      we do not track your activity outside the app.
+    </p>
+
+    <h2>5. Google Drive Usage</h2>
+    <p>
+      VYRA uses Google Drive only to store images that you choose to post. We
+      use the restricted Drive scope:
+    </p>
+    <p><code>https://www.googleapis.com/auth/drive.file</code></p>
+    <p>This scope allows VYRA to access only the files it creates.</p>
+    <p>We do not:</p>
+    <ul>
+      <li>Browse your existing Drive folders</li>
+      <li>Read unrelated files</li>
+      <li>Modify or delete files we did not create</li>
+    </ul>
+    <p>
+      When you publish a post, we upload the image to a dedicated folder (e.g.,
+      "VYRA Uploads") in your Google Drive and adjust permissions so that
+      "anyone with the link can view" the file. This is what allows other
+      users to see your posts. You can revoke this access at any time by
+      changing sharing settings or deleting the file from your Google Drive.
+    </p>
+
+    <h2>6. Image Generation APIs</h2>
+    <p>
+      VYRA may use third-party or Google APIs for image generation and remix
+      when you explicitly request it (e.g., "Remix" or "Generate" actions).
+      These APIs receive:
+    </p>
+    <ul>
+      <li>The text prompt generated from your reference</li>
+      <li>Optional temporary context for the reference image</li>
+    </ul>
+    <p>
+      API usage is tied to your authorized account configuration where
+      applicable. We do not secretly trigger image generation in the background
+      without your interaction.
+    </p>
+
+    <h2>7. Public Posts and Visibility</h2>
+    <p>
+      Only images you choose to post are made visible to other users. Public
+      visibility is handled through Google Drive's official sharing mechanism
+      using "anyone with the link can view." Other users do not gain direct
+      access to your Drive; they only see the image file you chose to share.
+    </p>
+
+    <h2>8. Data Storage Overview</h2>
+    <ul>
+      <li><strong>Uploaded & generated images (posted):</strong> Stored in your Google Drive.</li>
+      <li><strong>Metadata (prompts, timestamps, post IDs):</strong> Stored in our database to operate the app.</li>
+      <li><strong>Authentication data:</strong> Managed through Google Sign-In / OAuth.</li>
+    </ul>
+
+    <h2>9. Data Control & Deletion</h2>
+    <p>You can control your data in several ways:</p>
+    <ul>
+      <li>Delete posted images directly from your Google Drive.</li>
+      <li>Change or revoke "anyone with the link" sharing.</li>
+      <li>Revoke VYRA's access from your Google Account security settings.</li>
+      <li>Uninstall the app at any time.</li>
+    </ul>
+    <p>
+      Once access is revoked, VYRA can no longer access your Drive files or
+      create new ones.
+    </p>
+
+    <h2>10. Security</h2>
+    <p>
+      We use industry-standard security practices such as encrypted connections
+      (HTTPS) and OAuth-based authentication. We do not store your Google
+      credentials in plain text.
+    </p>
+
+    <h2>11. Children's Privacy</h2>
+    <p>
+      VYRA is not intended for children under 13 years of age. We do not
+      knowingly collect personal information from children.
+    </p>
+
+    <h2>12. Changes to This Policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time. Any material changes
+      will be reflected on this page with an updated "Last updated" date.
+    </p>
+
+    <h2>13. Contact</h2>
+    <p>
+      If you have any questions about this Privacy Policy, please contact us at:
+    </p>
+    <p>
+      Email:
+      <a href="mailto:youremail@example.com">youremail@example.com</a>
+    </p>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year"></span> VYRA. All rights reserved.</span>
+      <a href="terms-of-service.html">Terms of Service</a>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

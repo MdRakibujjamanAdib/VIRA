@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>VYRA – Your Virtual Camera</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="app_icon.png" />
+  <meta
+    name="description"
+    content="VYRA is your virtual camera for AI-generated images. Upload a reference, extract a precise prompt, remix, and save everything in your own Google Drive."
+  />
+  <style>
+    :root {
+      --bg: #050816;
+      --card: rgba(15, 23, 42, 0.85);
+      --border: rgba(148, 163, 184, 0.35);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --danger: #f97373;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Roboto", sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 55%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.9),
+        rgba(15, 23, 42, 0.65),
+        transparent
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .nav {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-name {
+      letter-spacing: 0.12em;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .brand-tag {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.85rem;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-cta {
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      background: radial-gradient(circle at 0 0, var(--accent-soft), transparent);
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 3.5rem 1.25rem 3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 2.75rem;
+      }
+      .nav {
+        padding-inline: 1rem;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.1;
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(to right, #38bdf8, #4f46e5);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 32rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .btn-primary {
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(15, 23, 42, 0.8);
+      background: radial-gradient(circle at 0 0, var(--accent-soft), #0284c7);
+      color: #e5f3ff;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 14px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-secondary {
+      padding: 0.7rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .hero-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .hero-note b {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .hero-card {
+      border-radius: 1.5rem;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top, #020617, var(--card));
+      padding: 1.4rem;
+      box-shadow: 0 18px 55px rgba(15, 23, 42, 0.85);
+    }
+
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.9rem;
+    }
+
+    .pill {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .hero-card-title {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .hero-card-body {
+      border-radius: 1rem;
+      border: 1px dashed rgba(148, 163, 184, 0.5);
+      padding: 0.9rem;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), transparent);
+      font-size: 0.82rem;
+      color: var(--text-main);
+    }
+
+    .hero-card-body pre {
+      white-space: pre-wrap;
+      font-size: 0.8rem;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+      color: var(--text-main);
+    }
+
+    .section {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem 2.75rem;
+    }
+
+    .section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .section p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+      max-width: 44rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.65rem;
+    }
+
+    .pill-soft {
+      font-size: 0.78rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text-muted);
+    }
+
+    footer {
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+      background: #020617;
+      padding: 1.4rem 1.25rem 1.6rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <div class="nav-left">
+        <img src="app_icon.png" alt="VYRA Logo" class="logo-mark" />
+        <div class="brand">
+          <span class="brand-name">VYRA</span>
+          <span class="brand-tag">Your Virtual Camera</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#privacy">Your Data</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms</a>
+        <a class="nav-cta" href="#download">App Preview</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="hero-kicker">Reference → Prompt → Image</div>
+        <h1 class="hero-title">
+          Meet <span>VYRA</span>, your virtual camera for AI-generated images.
+        </h1>
+        <p class="hero-sub">
+          Upload a reference image, extract a precise prompt, remix, and post —
+          all while keeping storage in <b>your own Google&nbsp;Drive</b>. Your
+          data, your limits, your control.
+        </p>
+        <div class="hero-actions" id="download">
+          <a class="btn-primary" href="#">
+            Get Android App (Coming Soon)
+          </a>
+          <a class="btn-secondary" href="#privacy">
+            Your data is all yours →
+          </a>
+        </div>
+        <p class="hero-note">
+          <b>No central storage.</b> VYRA uses your Google account and Google Drive so
+          your images remain under your ownership, not ours.
+        </p>
+      </div>
+
+      <aside class="hero-card" aria-label="VYRA workflow preview">
+        <div class="hero-card-header">
+          <span class="pill">Preview · Workflow</span>
+          <span class="hero-card-title">How VYRA works</span>
+        </div>
+        <div class="hero-card-body">
+          <pre>
+1. Sign in with Google
+2. Select or upload a reference image
+3. VYRA extracts a detailed prompt
+4. Remix and generate a new image
+5. Post it or download it
+6. Posted images are stored in your Google Drive
+7. Public posts are shared via "anyone with link"</pre>
+        </div>
+      </aside>
+    </section>
+
+    <section id="features" class="section">
+      <h2>What VYRA does</h2>
+      <p>
+        VYRA is a <b>visual prompt engine</b> that reads your reference images and
+        converts them into structured, high-fidelity prompts that modern AI
+        image models can understand and re-image accurately.
+      </p>
+      <div class="pill-row">
+        <span class="pill-soft">Reference-based prompt extraction</span>
+        <span class="pill-soft">Same-scene, same-lighting re-imaging</span>
+        <span class="pill-soft">Copy, remix, post or download</span>
+        <span class="pill-soft">User-owned Google Drive storage</span>
+        <span class="pill-soft">Public posts via "anyone with link"</span>
+      </div>
+    </section>
+
+    <section id="privacy" class="section">
+      <h2>Your data is all yours</h2>
+      <p>
+        VYRA is designed around a simple idea:
+        <b>your data should belong to you, not to the app.</b> VYRA does not store your
+        images on our servers. When you post, the image is saved in a dedicated
+        folder in your own Google Drive.
+      </p>
+      <p>
+        If you choose to make a post public, VYRA uses Google Drive's official
+        "anyone with the link" sharing option so other users can view the
+        image. You can revoke access at any time by changing sharing settings
+        or deleting the file from your Drive.
+      </p>
+      <p>
+        We use Google APIs only to:
+      </p>
+      <ul style="margin-left:1.1rem; margin-top:0.35rem; margin-bottom:0.9rem; font-size:0.9rem; color:var(--text-muted);">
+        <li>Authenticate you securely with Google Sign-In</li>
+        <li>Store images you choose to post in your Google Drive</li>
+        <li>Generate and remix images when you request it</li>
+      </ul>
+      <p>
+        We do not read unrelated files in your Drive, we do not sell your
+        data, and we do not use your private content to train our own models.
+        For full details, read our
+        <a href="privacy-policy.html">Privacy Policy</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year"></span> VYRA. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="#top">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
