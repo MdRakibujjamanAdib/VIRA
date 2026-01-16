@@ -16,21 +16,21 @@ This repo is used for:
 
 ## Hosting (GitHub Pages)
 
-1. Create a new repo (e.g. `vyra-landing`)
+1. Create a new repo (e.g. `VIRA`)
 2. Add these files and push to `main`
 3. In **Settings → Pages**:
    - Source: `Deploy from a branch`
    - Branch: `main` / root
 4. Your site will be available at:
 
-   - `https://<your-username>.github.io/vyra-landing/`
+   - `https://mdrakibujjamanadib.github.io/VIRA/`
 
 Then use:
 
-- Privacy Policy URL: `https://<your-username>.github.io/vyra-landing/privacy-policy.html`
-- Terms URL: `https://<your-username>.github.io/vyra-landing/terms-of-service.html`
+- Privacy Policy URL: `https://mdrakibujjamanadib.github.io/VIRA/privacy-policy.html`
+- Terms URL: `https://mdrakibujjamanadib.github.io/VIRA/terms-of-service.html`
 
 ## Customization
 
-- Replace `youremail@example.com` with your support email.
-- Replace `[add date]` with the current date.
+- Replace `hello@adibx.me` with your support email.
+- Replace `January 17, 2026` with the current date.
