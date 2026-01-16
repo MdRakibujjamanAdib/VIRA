@@ -14,21 +14,22 @@ This repo is used for:
 - `privacy-policy.html` – privacy policy
 - `terms-of-service.html` – terms of service
 
-## Hosting (GitHub Pages)
+## Hosting (GitHub Pages + Custom Domain)
 
 1. Create a new repo (e.g. `VIRA`)
 2. Add these files and push to `main`
 3. In **Settings → Pages**:
    - Source: `Deploy from a branch`
    - Branch: `main` / root
+   - Custom domain: `vira.adibx.me`
 4. Your site will be available at:
 
-   - `https://mdrakibujjamanadib.github.io/VIRA/`
+   - `https://vira.adibx.me/`
 
 Then use:
 
-- Privacy Policy URL: `https://mdrakibujjamanadib.github.io/VIRA/privacy-policy.html`
-- Terms URL: `https://mdrakibujjamanadib.github.io/VIRA/terms-of-service.html`
+- Privacy Policy URL: `https://vira.adibx.me/privacy-policy.html`
+- Terms URL: `https://vira.adibx.me/terms-of-service.html`
 
 ## Customization
 
